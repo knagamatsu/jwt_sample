@@ -10,7 +10,7 @@ function Dashboard() {
     const fetchUserData = async () => {
       try {
         const userData = await getUserProfile();
-        console.log('APIから返されたユーザーデータ:', userData); // デバッグ用
+        console.log('APIから返されたユーザーデータ:', userData);
         setUser(userData);
       } catch (err) {
         setError('ユーザー情報の取得に失敗しました。');
@@ -37,13 +37,9 @@ function Dashboard() {
       {user && (
         <div className="user-profile">
           <h3>ユーザープロフィール</h3>
-          <p><strong>ユーザー名:</strong> {user.username}</p>
-          {/* バックエンドのレスポンス構造に合わせて条件付きで表示 */}
-          {user.email && <p><strong>メールアドレス:</strong> {user.email}</p>}
-          {/* 代替のプロパティ名かもしれない場合 */}
-          {user.email_address && <p><strong>メールアドレス:</strong> {user.email_address}</p>}
+          <p><strong>メールアドレス:</strong> {user.email}</p>
+          {user.username && <p><strong>ユーザー名:</strong> {user.username}</p>}
           
-          {/* すべてのユーザーデータを表示（デバッグ用） */}
           <div className="debug-info">
             <h4>デバッグ情報:</h4>
             <pre>{JSON.stringify(user, null, 2)}</pre>

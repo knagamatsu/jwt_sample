@@ -1,20 +1,24 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 from typing import Optional
 
 class UserBase(BaseModel):
-    username: str
+    email: EmailStr
 
 class UserCreate(UserBase):
     password: str
 
-class User(UserBase):
+class User(BaseModel):
+    email: EmailStr
     id: int
+    username: Optional[str] = None
 
     class Config:
         orm_mode = True
+        # Pydantic v2対応
+        from_attributes = True
 
 class UserLogin(BaseModel):
-    username: str
+    email: EmailStr
     password: str
 
 class Token(BaseModel):
@@ -22,4 +26,4 @@ class Token(BaseModel):
     token_type: str
 
 class TokenData(BaseModel):
-    username: Optional[str] = None
+    email: Optional[str] = None

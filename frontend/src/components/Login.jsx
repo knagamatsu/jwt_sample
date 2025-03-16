@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../services/api';
 
 function Login({ setAuth }) {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ function Login({ setAuth }) {
     setError('');
     
     try {
-      const data = await loginUser({ username, password });
+      const data = await loginUser({ email, password });
       localStorage.setItem('token', data.access_token);
       setAuth(true);
       navigate('/dashboard');
@@ -30,12 +30,12 @@ function Login({ setAuth }) {
       
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="username">ユーザー名</label>
+          <label htmlFor="email">メールアドレス</label>
           <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>

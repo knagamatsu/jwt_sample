@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String
-from database import Base
+from .database import Base  # 相対インポートに変更
 
 class User(Base):
     __tablename__ = "users"

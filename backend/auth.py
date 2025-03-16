@@ -4,8 +4,8 @@ from passlib.context import CryptContext
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
-import schemas, models
-from database import get_db
+from . import schemas, models
+from .database import get_db
 
 # JWT設定
 SECRET_KEY = "YOUR_SECRET_KEY"  # 本番環境では安全に管理すべき秘密鍵

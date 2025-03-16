@@ -176,3 +176,38 @@ npm run dev
 ## トラブルシューティング
 
 ### bcryptの警告について
+
+## デスクトップアプリ化
+
+このWebアプリをPyWebViewを使用してデスクトップアプリケーションとして実行することもできます。
+
+### 必要な依存関係
+
+```bash
+pip install pywebview
+pip install -r backend/requirements.txt
+```
+
+### デスクトップアプリのビルドと実行
+
+1. フロントエンドのビルド
+```bash
+cd frontend
+npm run build
+```
+
+2. デスクトップアプリの実行
+```bash
+python desktop_app.py
+```
+
+### パッケージング
+
+PyInstallerを使用して単一の実行ファイルにパッケージ化できます。
+
+```bash
+pip install pyinstaller
+pyinstaller --onefile --windowed desktop_app.py
+```
+
+ビルドされた実行ファイルは `dist` ディレクトリに生成されます。

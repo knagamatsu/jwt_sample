@@ -1,7 +1,8 @@
 from fastapi import FastAPI, Depends, HTTPException, status, Request
 from fastapi.middleware.cors import CORSMiddleware
-import models, schemas, auth
-from database import engine, get_db
+# 相対インポートに変更
+from . import models, schemas, auth
+from .database import engine, get_db
 from sqlalchemy.orm import Session
 from typing import Annotated
 import traceback
@@ -86,3 +87,17 @@ def read_users_me(current_user: models.User = Depends(auth.get_current_user)):
         "id": current_user.id,
         "username": current_user.username
     }
+
+# デスクトップアプリ統合のため、静的ファイル提供を追加
+from fastapi.staticfiles import StaticFiles
+import os
+
+# 静的ファイルのディレクトリを確認
+frontend_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "dist")
+if os.path.exists(frontend_dir):
+    app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="static")
+
+# スクリプトが直接実行された場合のみサーバーを起動（デスクトップアプリでは使用しない）
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)

@@ -24,4 +24,11 @@ export default defineConfig({
       }
     }
   },
+  // デスクトップアプリ用の設定
+  base: './', // 相対パスでアセットを読み込む
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    emptyOutDir: true,
+  }
 })
